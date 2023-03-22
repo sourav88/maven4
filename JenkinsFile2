@@ -25,21 +25,5 @@ pipeline
 
 		}
 	 }
-	 stage('ContinuousTesting')
-	 {
-	  steps
-	   {
-	    git 'https://github.com/sourav88/FunctionalTesting.git'
-	    sh 'java -jar  /var/lib/jenkins/workspace/DeclarativePipeline2/testing.jar'
-		}
-	 }
-	 stage('ContinuousDelivery')
-	 {
-	  steps
-	   {
-	    input message: 'Approve delivery of code', submitter: 'srini'
-		deploy adapters: [tomcat9(credentialsId: '8dccc17f-b77d-4e14-a644-d229ae01cebc', path: '', url: 'http://172.31.12.29:8080')], contextPath: 'prodapp88', war: '**/*.war'
-		}
-	 }
    }
 }
